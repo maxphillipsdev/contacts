@@ -23,7 +23,6 @@ const AppShell: React.FC = ({ children }) => {
         alignItems="center"
         w="100%"
         p={4}
-        color={"white"}
         height={"64px"}
       >
         <Box className="icons">
