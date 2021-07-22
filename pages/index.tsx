@@ -1,21 +1,22 @@
-import { Button, useToast } from "@chakra-ui/react";
+import { Flex, Button, useToast } from "@chakra-ui/react";
 
 const Home: React.FC = () => {
   const toast = useToast();
 
   return (
-    <div>
+    <Flex h="100%" justifyContent="center" alignItems="center">
       <Button
         onClick={() => {
           toast({
             title: "Clicked!",
             description: "nice.",
+            status: "success",
           });
         }}
       >
         Click me!
       </Button>
-    </div>
+    </Flex>
   );
 };
 

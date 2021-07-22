@@ -1,8 +1,8 @@
 import {
   Box,
+  Divider,
   Flex,
   IconButton,
-  IconButtonProps,
   Spacer,
   useDisclosure,
   VStack,
@@ -10,6 +10,7 @@ import {
 import { HiMenu } from "react-icons/hi";
 import React from "react";
 import Sidebar from "./Sidebar";
+import ThemeToggle from "./ThemeToggle";
 
 const AppShell: React.FC = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -20,7 +21,6 @@ const AppShell: React.FC = ({ children }) => {
         as="nav"
         className="header"
         alignItems="center"
-        bg="tomato"
         w="100%"
         p={4}
         color={"white"}
@@ -34,10 +34,13 @@ const AppShell: React.FC = ({ children }) => {
           />
         </Box>
         <Spacer />
-        <Box className="">Options</Box>
+        <Box className="">
+          <ThemeToggle />
+        </Box>
       </Flex>
       <Sidebar isOpen={isOpen} onClose={onClose} />
-      <Box w="100%" h="100%" bg="teal">
+      <Divider />
+      <Box w="100%" h="100%">
         {children}
       </Box>
     </VStack>

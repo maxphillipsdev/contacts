@@ -22,7 +22,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, btnRef }) => {
   return (
     <Drawer
       isOpen={isOpen}
-      placement="right"
+      placement="left"
       onClose={onClose}
       finalFocusRef={btnRef}
     >
