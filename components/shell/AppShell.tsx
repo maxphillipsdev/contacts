@@ -10,7 +10,7 @@ import {
 import { HiMenu } from "react-icons/hi";
 import React from "react";
 import Sidebar from "./Sidebar";
-import ThemeToggle from "./ThemeToggle";
+import ThemeToggle from "../utils/ThemeToggle";
 
 const AppShell: React.FC = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();

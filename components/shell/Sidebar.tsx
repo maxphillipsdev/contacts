@@ -1,5 +1,6 @@
 import {
   Button,
+  Divider,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -7,9 +8,11 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
+  Flex,
+  Heading,
   Input,
 } from "@chakra-ui/react";
-
+import { HiUserCircle } from "react-icons/hi";
 import React from "react";
 
 interface SidebarProps {
@@ -29,18 +32,16 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, btnRef }) => {
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
-        <DrawerHeader>Create your account</DrawerHeader>
+        <DrawerHeader display="flex" alignItems="center">
+          <HiUserCircle size="36" />
+          <Heading as="h4" marginLeft="0.5rem">
+            Contacts
+          </Heading>
+        </DrawerHeader>
+        <Divider />
+        <DrawerBody></DrawerBody>
 
-        <DrawerBody>
-          <Input placeholder="Type here..." />
-        </DrawerBody>
-
-        <DrawerFooter>
-          <Button variant="outline" mr={3} onClick={onClose}>
-            Cancel
-          </Button>
-          <Button colorScheme="blue">Save</Button>
-        </DrawerFooter>
+        <DrawerFooter></DrawerFooter>
       </DrawerContent>
     </Drawer>
   );
