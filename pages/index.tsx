@@ -1,11 +1,13 @@
 import { Flex, Button, useToast } from "@chakra-ui/react";
+import AddContactForm from "../components/shell/AddContactForm";
 
 const Home: React.FC = () => {
   const toast = useToast();
 
   return (
     <Flex h="100%" justifyContent="center" alignItems="center">
-      <Button
+      <AddContactForm />
+      {/* <Button
         onClick={() => {
           toast({
             title: "Clicked!",
@@ -15,7 +17,7 @@ const Home: React.FC = () => {
         }}
       >
         Click me!
-      </Button>
+      </Button> */}
     </Flex>
   );
 };
