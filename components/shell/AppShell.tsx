@@ -11,6 +11,7 @@ import { HiMenu } from "react-icons/hi";
 import React from "react";
 import Sidebar from "./Sidebar";
 import ThemeToggle from "../utils/ThemeToggle";
+import AddContactModal from "./AddContactModal";
 
 const AppShell: React.FC = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -33,9 +34,11 @@ const AppShell: React.FC = ({ children }) => {
           />
         </Box>
         <Spacer />
-        <Box className="">
+
+        <Flex gridColumnGap="1rem">
+          <AddContactModal />
           <ThemeToggle />
-        </Box>
+        </Flex>
       </Flex>
       <Sidebar isOpen={isOpen} onClose={onClose} />
       <Divider />
