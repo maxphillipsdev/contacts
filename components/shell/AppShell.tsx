@@ -12,8 +12,13 @@ import React from "react";
 import Sidebar from "./Sidebar";
 import ThemeToggle from "../utils/ThemeToggle";
 import AddContactModal from "./AddContactModal";
+import { ContactsDB } from "../../lib/db";
 
-const AppShell: React.FC = ({ children }) => {
+interface AppShellProps {
+  db: ContactsDB;
+}
+
+const AppShell: React.FC<AppShellProps> = ({ children, db }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -36,7 +41,7 @@ const AppShell: React.FC = ({ children }) => {
         <Spacer />
 
         <Flex gridColumnGap="1rem">
-          <AddContactModal />
+          <AddContactModal db={db} />
           <ThemeToggle />
         </Flex>
       </Flex>

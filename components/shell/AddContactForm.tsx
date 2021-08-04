@@ -1,23 +1,47 @@
 import {
+  Button,
+  Flex,
   FormControl,
   FormLabel,
   HStack,
   Input,
   Select,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { HiMail, HiOfficeBuilding, HiPhone, HiUser } from "react-icons/hi";
-const AddContactForm: React.FC = () => {
+import { ContactsDB, IContact } from "../../lib/db";
+
+interface AddContactFormProps {
+  db: ContactsDB;
+}
+
+const AddContactForm: React.FC<AddContactFormProps> = ({ db }) => {
   const {
     handleSubmit,
     register,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useForm();
 
+  const toast = useToast();
+
+  const onSubmit: SubmitHandler<IContact> = async (data) => {
+    console.log(data);
+    await db.contacts
+      .add(data)
+      .then(() => {
+        toast({ status: "success", title: "Contact Created" });
+      })
+      .catch((e: Error) => {
+        console.error(e);
+        toast({ status: "error", title: "Error creating contact." });
+      });
+  };
+
   return (
-    <FormControl id="add-contact" isInvalid={errors.name}>
+    <form id="add-contact" onSubmit={handleSubmit(onSubmit)}>
       <VStack spacing={4} align="stretch" marginInline="4">
         <HStack aria-label="Personal details">
           <FormLabel>
@@ -79,8 +103,18 @@ const AddContactForm: React.FC = () => {
             {...register("email")}
           />
         </HStack>
+        <Flex justifyContent="center" alignItems="center">
+          <Button
+            aria-label="Create Contact Button"
+            type="submit"
+            colorScheme="teal"
+            isLoading={isSubmitting}
+          >
+            Create Contact
+          </Button>
+        </Flex>
       </VStack>
-    </FormControl>
+    </form>
   );
 };
 
