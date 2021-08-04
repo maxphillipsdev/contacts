@@ -7,6 +7,8 @@ import Head from "next/head";
 import ContactsDB from "../lib/db";
 import { useEffect, useState } from "react";
 
+// TODO: Refactor to use a context provider.
+
 function MyApp({ Component, pageProps }: AppProps) {
   const [db, setDb] = useState<ContactsDB | null>(null);
   useEffect(() => {
