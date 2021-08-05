@@ -12,9 +12,12 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { HiPlus } from "react-icons/hi";
+import { ContactsDB } from "../../lib/db";
 import AddContactForm from "./AddContactForm";
 
-const AddContactModal: React.FC = () => {
+interface AddContactModalProps {}
+
+const AddContactModal: React.FC<AddContactModalProps> = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (

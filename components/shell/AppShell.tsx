@@ -12,8 +12,11 @@ import React from "react";
 import Sidebar from "./Sidebar";
 import ThemeToggle from "../utils/ThemeToggle";
 import AddContactModal from "./AddContactModal";
+import { ContactsDB } from "../../lib/db";
 
-const AppShell: React.FC = ({ children }) => {
+interface AppShellProps {}
+
+const AppShell: React.FC<AppShellProps> = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
