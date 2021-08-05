@@ -1,26 +1,23 @@
 import {
   Flex,
-  Button,
-  useToast,
-  UnorderedList,
   ListItem,
   Spinner,
+  UnorderedList,
+  useToast,
 } from "@chakra-ui/react";
-import { useLiveQuery } from "dexie-react-hooks";
-import { useEffect, useState } from "react";
-import AddContactForm from "../components/shell/AddContactForm";
-import { ContactsDB, IContact } from "../lib/db";
+import { useContext, useEffect, useState } from "react";
+import DBContext, { IContact } from "../lib/db";
 
-interface HomeProps {
-  db: ContactsDB;
-}
+interface HomeProps {}
 
-const Home: React.FC<HomeProps> = ({ db }) => {
-  const toast = useToast();
-
+const Home: React.FC<HomeProps> = () => {
+  const db = useContext(DBContext);
   const [contacts, setContacts] = useState<IContact[] | null>([]);
 
   useEffect(() => {
+    if (!db) {
+      return;
+    }
     db.contacts
       .orderBy("givenName")
       .limit(10)
@@ -28,7 +25,7 @@ const Home: React.FC<HomeProps> = ({ db }) => {
       .then((result) => {
         setContacts(result);
       });
-  }, [contacts]);
+  }, [contacts, db]);
 
   return (
     <Flex h="100%" justifyContent="center" alignItems="center">

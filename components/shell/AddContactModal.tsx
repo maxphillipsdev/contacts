@@ -15,11 +15,9 @@ import { HiPlus } from "react-icons/hi";
 import { ContactsDB } from "../../lib/db";
 import AddContactForm from "./AddContactForm";
 
-interface AddContactModalProps {
-  db: ContactsDB;
-}
+interface AddContactModalProps {}
 
-const AddContactModal: React.FC<AddContactModalProps> = ({ db }) => {
+const AddContactModal: React.FC<AddContactModalProps> = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -35,7 +33,7 @@ const AddContactModal: React.FC<AddContactModalProps> = ({ db }) => {
           <ModalHeader>Add Contact</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <AddContactForm db={db} />
+            <AddContactForm />
           </ModalBody>
         </ModalContent>
       </Modal>

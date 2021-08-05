@@ -9,16 +9,16 @@ import {
   useToast,
   VStack,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { HiMail, HiOfficeBuilding, HiPhone, HiUser } from "react-icons/hi";
-import { ContactsDB, IContact } from "../../lib/db";
+import DBContext, { ContactsDB, IContact } from "../../lib/db";
 
-interface AddContactFormProps {
-  db: ContactsDB;
-}
+interface AddContactFormProps {}
 
-const AddContactForm: React.FC<AddContactFormProps> = ({ db }) => {
+const AddContactForm: React.FC<AddContactFormProps> = () => {
+  const db = useContext(DBContext);
+
   const {
     handleSubmit,
     register,
@@ -28,7 +28,14 @@ const AddContactForm: React.FC<AddContactFormProps> = ({ db }) => {
   const toast = useToast();
 
   const onSubmit: SubmitHandler<IContact> = async (data) => {
-    console.log(data);
+    if (!db) {
+      toast({
+        status: "error",
+        title: "Database is available.",
+        description: "Please try again later.",
+      });
+      return;
+    }
     await db.contacts
       .add(data)
       .then(() => {

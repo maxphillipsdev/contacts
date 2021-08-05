@@ -14,11 +14,9 @@ import ThemeToggle from "../utils/ThemeToggle";
 import AddContactModal from "./AddContactModal";
 import { ContactsDB } from "../../lib/db";
 
-interface AppShellProps {
-  db: ContactsDB;
-}
+interface AppShellProps {}
 
-const AppShell: React.FC<AppShellProps> = ({ children, db }) => {
+const AppShell: React.FC<AppShellProps> = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -41,7 +39,7 @@ const AppShell: React.FC<AppShellProps> = ({ children, db }) => {
         <Spacer />
 
         <Flex gridColumnGap="1rem">
-          <AddContactModal db={db} />
+          <AddContactModal />
           <ThemeToggle />
         </Flex>
       </Flex>

@@ -1,4 +1,5 @@
 import Dexie from "dexie";
+import React from "react";
 
 export class ContactsDB extends Dexie {
   contacts: Dexie.Table<IContact, number>;
@@ -24,4 +25,6 @@ export interface IContact {
   email: string;
 }
 
-export default ContactsDB;
+const DBContext = React.createContext<ContactsDB | null>(null);
+
+export default DBContext;

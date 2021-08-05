@@ -1,16 +1,14 @@
+import { ChakraProvider, Spinner } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
-import { ChakraProvider } from "@chakra-ui/react";
-import appTheme from "../lib/theme";
-import AppShell from "../components/shell/AppShell";
 import Head from "next/head";
-
-import ContactsDB from "../lib/db";
 import { useEffect, useState } from "react";
-
-// TODO: Refactor to use a context provider.
+import AppShell from "../components/shell/AppShell";
+import DBContext, { ContactsDB } from "../lib/db";
+import appTheme from "../lib/theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [db, setDb] = useState<ContactsDB | null>(null);
+
   useEffect(() => {
     if (!db) {
       setDb(new ContactsDB());
@@ -18,18 +16,20 @@ function MyApp({ Component, pageProps }: AppProps) {
     return () => {};
   }, [db]);
 
-  if (!db) {
-    return null;
-  }
-
   return (
     <ChakraProvider theme={appTheme}>
-      <Head>
-        <title>Contacts</title>
-      </Head>
-      <AppShell db={db}>
-        <Component {...pageProps} db={db} />
-      </AppShell>
+      <DBContext.Provider value={db}>
+        <Head>
+          <title>Contacts</title>
+        </Head>
+        {db ? (
+          <AppShell>
+            <Component {...pageProps} />
+          </AppShell>
+        ) : (
+          <Spinner />
+        )}
+      </DBContext.Provider>
     </ChakraProvider>
   );
 }
