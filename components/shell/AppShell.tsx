@@ -11,8 +11,9 @@ import { HiMenu } from "react-icons/hi";
 import React from "react";
 import Sidebar from "./Sidebar";
 import ThemeToggle from "../utils/ThemeToggle";
+import dynamic from "next/dynamic";
 import AddContactModal from "./AddContactModal";
-import { ContactsDB } from "../../lib/db";
+import ImportContacts from "./ImportContacts";
 
 interface AppShellProps {}
 
@@ -39,6 +40,7 @@ const AppShell: React.FC<AppShellProps> = ({ children }) => {
         <Spacer />
 
         <Flex gridColumnGap="1rem">
+          <ImportContacts />
           <AddContactModal />
           <ThemeToggle />
         </Flex>
