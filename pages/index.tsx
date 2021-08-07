@@ -20,8 +20,8 @@ const Home: React.FC<HomeProps> = () => {
       return;
     }
     db.contacts
-      .orderBy("givenName")
-      .limit(10)
+      // .orderBy("givenName")
+      // .limit(10)
       .toArray()
       .then((result) => {
         setContacts(result);
