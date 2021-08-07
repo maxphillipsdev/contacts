@@ -1,11 +1,12 @@
 import {
-  Flex,
+  Accordion,
   ListItem,
   Spinner,
   UnorderedList,
   useToast,
 } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
+import ContactCard from "../components/ContactCard";
 import DBContext, { IContact } from "../lib/db";
 
 interface HomeProps {}
@@ -28,21 +29,15 @@ const Home: React.FC<HomeProps> = () => {
   }, [contacts, db]);
 
   return (
-    <Flex h="100%" justifyContent="center" alignItems="center">
-      <UnorderedList>
-        {!contacts ? (
-          <Spinner />
-        ) : (
-          contacts.map((contact) => {
-            return (
-              <ListItem key={contact.id}>
-                {contact.givenName} {contact.familyName}
-              </ListItem>
-            );
-          })
-        )}
-      </UnorderedList>
-    </Flex>
+    <Accordion h="100%">
+      {!contacts ? (
+        <Spinner />
+      ) : (
+        contacts.map((contact) => {
+          return <ContactCard key={contact.id} contact={contact} />;
+        })
+      )}
+    </Accordion>
   );
 };
 
