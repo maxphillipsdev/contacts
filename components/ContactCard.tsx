@@ -25,7 +25,11 @@ const ContactCard: React.FC<ContactCardProps> = ({ contact }) => {
         <Avatar size="lg" name={contact.name} />
         <Box d="flex">
           <Text fontWeight="bold">
-            {contact.name ? contact.name : contact.tel}
+            {contact.name
+              ? contact.name
+              : contact.email
+              ? contact.email
+              : contact.tel}
           </Text>
         </Box>
         <AccordionIcon />

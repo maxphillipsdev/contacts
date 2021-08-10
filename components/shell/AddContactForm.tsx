@@ -9,10 +9,10 @@ import {
   useToast,
   VStack,
 } from "@chakra-ui/react";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { HiMail, HiOfficeBuilding, HiPhone, HiUser } from "react-icons/hi";
-import DBContext, { ContactsDB, IContact } from "../../lib/db";
+import DBContext, { IContact } from "../../lib/db";
 
 interface AddContactFormProps {}
 
@@ -28,7 +28,7 @@ const AddContactForm: React.FC<AddContactFormProps> = () => {
   const toast = useToast();
 
   const onSubmit: SubmitHandler<IContact> = async (data) => {
-    if (data.name || data.tel) {
+    if (data.name || data.tel || data.email) {
       if (!db) {
         toast({
           status: "error",
@@ -49,7 +49,7 @@ const AddContactForm: React.FC<AddContactFormProps> = () => {
     } else {
       toast({
         title: "Missing required details.",
-        description: "Please include either a name or phone number.",
+        description: "Please include either a name, email or phone number.",
         status: "error",
       });
     }
