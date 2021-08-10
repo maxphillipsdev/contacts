@@ -9,7 +9,7 @@ import {
   useToast,
   VStack,
 } from "@chakra-ui/react";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { HiMail, HiOfficeBuilding, HiPhone, HiUser } from "react-icons/hi";
 import DBContext, { ContactsDB, IContact } from "../../lib/db";
@@ -22,29 +22,37 @@ const AddContactForm: React.FC<AddContactFormProps> = () => {
   const {
     handleSubmit,
     register,
-    formState: { isSubmitting },
-  } = useForm();
+    formState: { isSubmitting, errors },
+  } = useForm<IContact>();
 
   const toast = useToast();
 
   const onSubmit: SubmitHandler<IContact> = async (data) => {
-    if (!db) {
+    if (data.name || data.tel) {
+      if (!db) {
+        toast({
+          status: "error",
+          title: "Database is available.",
+          description: "Please try again later.",
+        });
+        return;
+      }
+      await db.contacts
+        .add(data)
+        .then(() => {
+          toast({ status: "success", title: "Contact Created" });
+        })
+        .catch((e: Error) => {
+          console.error(e);
+          toast({ status: "error", title: "Error creating contact." });
+        });
+    } else {
       toast({
+        title: "Missing required details.",
+        description: "Please include either a name or phone number.",
         status: "error",
-        title: "Database is available.",
-        description: "Please try again later.",
       });
-      return;
     }
-    await db.contacts
-      .add(data)
-      .then(() => {
-        toast({ status: "success", title: "Contact Created" });
-      })
-      .catch((e: Error) => {
-        console.error(e);
-        toast({ status: "error", title: "Error creating contact." });
-      });
   };
 
   return (
@@ -55,21 +63,15 @@ const AddContactForm: React.FC<AddContactFormProps> = () => {
             <HiUser />
           </FormLabel>
           <Input
-            id="given-name"
-            autoComplete="given-name"
-            placeholder="First Name"
-            {...register("givenName", {
-              required: "This is required",
+            id="name"
+            autoComplete="name"
+            placeholder="Name"
+            {...register("name", {
               minLength: {
                 value: 1,
                 message: "Minimum length should be 1",
               },
             })}
-          />
-          <Input
-            id="familyName"
-            placeholder="Surname"
-            {...register("familyName")}
           />
         </HStack>
         <HStack aria-label="Contact details">
@@ -93,11 +95,6 @@ const AddContactForm: React.FC<AddContactFormProps> = () => {
             placeholder="Phone"
             {...register("tel")}
           />
-          <Select>
-            <option value="mobile">Mobile</option>
-            <option value="work">Work</option>
-            <option value="home">Home</option>
-          </Select>
         </HStack>
         <HStack aria-label="Contact details">
           <FormLabel>

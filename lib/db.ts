@@ -7,7 +7,7 @@ export class ContactsDB extends Dexie {
   constructor() {
     super("ContactsDB");
     this.version(1).stores({
-      contacts: "++id, givenName, familyName, organization, tel, email",
+      contacts: "++id, name, organization, tel, email",
       //...other tables goes here...
     });
     // The following line is needed if your typescript
@@ -18,8 +18,7 @@ export class ContactsDB extends Dexie {
 
 export interface IContact {
   id?: number;
-  givenName: string;
-  familyName: string;
+  name: string;
   organization: string;
   tel: string;
   email: string;
