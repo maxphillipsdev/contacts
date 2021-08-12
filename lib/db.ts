@@ -17,7 +17,7 @@ export class ContactsDB extends Dexie {
 }
 
 export interface IContact {
-  id?: number;
+  id: number;
   name: string;
   organization: string;
   tel: string;
