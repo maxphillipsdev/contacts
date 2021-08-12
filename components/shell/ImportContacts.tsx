@@ -21,7 +21,7 @@ const ImportContacts: React.FC = () => {
         return;
       }
       try {
-        const contacts: IContact[] = await navigator.contacts.select(props, {
+        const contacts: IContact[] = await navigator?.contacts?.select(props, {
           multiple: true,
         });
         await db.contacts
