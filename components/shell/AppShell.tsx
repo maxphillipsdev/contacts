@@ -12,7 +12,7 @@ import React from "react";
 import Sidebar from "./Sidebar";
 import ThemeToggle from "../utils/ThemeToggle";
 import AddContactModal from "./AddContactModal";
-import { ContactsDB } from "../../lib/db";
+import ImportContacts from "./ImportContacts";
 
 interface AppShellProps {}
 
@@ -30,20 +30,21 @@ const AppShell: React.FC<AppShellProps> = ({ children }) => {
         height={"64px"}
       >
         <Box className="icons">
-          <IconButton
+          {/* <IconButton
             onClick={onOpen}
             aria-label="Toggle sidebar"
             icon={<HiMenu size="1.5rem" />}
-          />
+          /> */}
         </Box>
         <Spacer />
 
         <Flex gridColumnGap="1rem">
+          <ImportContacts />
           <AddContactModal />
           <ThemeToggle />
         </Flex>
       </Flex>
-      <Sidebar isOpen={isOpen} onClose={onClose} />
+      {/* <Sidebar isOpen={isOpen} onClose={onClose} /> */}
       <Divider />
       <Box w="100%" h="100%">
         {children}
