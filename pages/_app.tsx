@@ -20,6 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ChakraProvider theme={theme}>
       <DBContext.Provider value={db}>
         <Head>
+          <link rel="manifest" href="/manifest.json" />
           <title>Contacts</title>
         </Head>
         {db ? (
