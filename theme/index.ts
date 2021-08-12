@@ -1,11 +1,15 @@
 import { extendTheme } from '@chakra-ui/react'
 import foundations from './foundations'
 
+// Cursed typescript bullshittery below, please look away.
+let betterExtendTheme: any;
+betterExtendTheme = extendTheme;
+
 const direction = 'ltr'
 
 const config = {
   useSystemColorMode: false,
-  initialColorMode: 'light',
+  initialColorMode: 'dark',
   cssVarPrefix: 'chakra',
 }
 
@@ -15,4 +19,4 @@ export const theme = {
   config,
 }
 
-export default extendTheme(theme)
+export default betterExtendTheme(theme)
