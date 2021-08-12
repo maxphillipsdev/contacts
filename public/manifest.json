@@ -1,7 +1,7 @@
 {
   "theme_color": "#4C5869",
   "background_color": "#4C5869",
-  "display": "fullscreen",
+  "display": "standalone",
   "start_url": "/",
   "name": "Contacts",
   "short_name": "Contacts",
