@@ -4,7 +4,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import AppShell from "../components/shell/AppShell";
 import DBContext, { ContactsDB } from "../lib/db";
-import appTheme from "../lib/theme";
+import theme from "../theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [db, setDb] = useState<ContactsDB | null>(null);
@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [db]);
 
   return (
-    <ChakraProvider theme={appTheme}>
+    <ChakraProvider theme={theme}>
       <DBContext.Provider value={db}>
         <Head>
           <title>Contacts</title>

@@ -11,7 +11,6 @@ import { HiMenu } from "react-icons/hi";
 import React from "react";
 import Sidebar from "./Sidebar";
 import ThemeToggle from "../utils/ThemeToggle";
-import dynamic from "next/dynamic";
 import AddContactModal from "./AddContactModal";
 import ImportContacts from "./ImportContacts";
 
@@ -31,11 +30,11 @@ const AppShell: React.FC<AppShellProps> = ({ children }) => {
         height={"64px"}
       >
         <Box className="icons">
-          <IconButton
+          {/* <IconButton
             onClick={onOpen}
             aria-label="Toggle sidebar"
             icon={<HiMenu size="1.5rem" />}
-          />
+          /> */}
         </Box>
         <Spacer />
 
@@ -45,7 +44,7 @@ const AppShell: React.FC<AppShellProps> = ({ children }) => {
           <ThemeToggle />
         </Flex>
       </Flex>
-      <Sidebar isOpen={isOpen} onClose={onClose} />
+      {/* <Sidebar isOpen={isOpen} onClose={onClose} /> */}
       <Divider />
       <Box w="100%" h="100%">
         {children}
