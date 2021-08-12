@@ -18,10 +18,10 @@ export class ContactsDB extends Dexie {
 
 export interface IContact {
   id: number;
-  name: string;
-  organization: string;
-  tel: string;
-  email: string;
+  name?: string;
+  organization?: string;
+  tel?: string;
+  email?: string;
 }
 
 const DBContext = React.createContext<ContactsDB | null>(null);

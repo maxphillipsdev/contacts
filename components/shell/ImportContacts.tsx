@@ -8,7 +8,7 @@ const ImportContacts: React.FC = () => {
   const db = useContext(DBContext);
   const supported: boolean =
     "contacts" in navigator && "ContactsManager" in window;
-  const props = ["email", "tel"];
+  const props = ["name", "email", "tel"];
 
   const handleClick = async () => {
     if (supported) {
