@@ -24,6 +24,7 @@ const ImportContacts: React.FC = () => {
         const contacts: IContact[] = await navigator?.contacts?.select(props, {
           multiple: true,
         });
+        console.log(contacts);
         await db.contacts
           .bulkAdd(contacts)
           .then(async () => {
