@@ -6,6 +6,8 @@ import AppShell from "../components/shell/AppShell";
 import DBContext, { ContactsDB } from "../lib/db";
 import theme from "../theme";
 
+import Sentry from "@sentry/nextjs";
+
 Sentry.init({
   dsn: "https://1f84883d6be1447c886f88fe70ff7de0@o302306.ingest.sentry.io/5905560",
 
